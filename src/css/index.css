@@ -24,3 +24,14 @@ h1 {
   position: fixed;
   top: 1%;
 }
+#showCountries {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.list-group.m-1 {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

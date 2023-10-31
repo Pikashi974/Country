@@ -1,0 +1,26 @@
+.form-group {
+  display: grid;
+  grid-gap: 1%;
+  grid-template-columns: max-content max-content;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+h1 {
+  color: red;
+  font: bold;
+  position: fixed;
+  top: 1%;
+}

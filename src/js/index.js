@@ -7,7 +7,8 @@ let tableCountries;
 async function init() {
   tableCountries = await fetchCountries();
   tableMapped = displayCountries();
-  showCountries(tableMapped.length);
+  rangeValue.textContent = rangeObject.value;
+  showCountries(rangeObject.value);
 }
 
 init();
@@ -17,19 +18,25 @@ rangeObject.addEventListener("change", function () {
   showCountries(rangeObject.value);
 });
 
+floatingInput.addEventListener("keyup", function () {
+  rangeValue.textContent = rangeObject.value;
+  tableMapped = displayCountries();
+  showCountries(rangeObject.value);
+});
+
 function fetchCountries() {
   return fetch("https://restcountries.com/v3.1/all").then((response) =>
     response.json()
   );
 }
 function displayCountries() {
-  var valeur = document.querySelector("#floatingInput").value;
-
+  var valeur = document.querySelector("#floatingInput").value.toLowerCase();
   return tableCountries
     .filter(
       (country) =>
-        (country.capital && country.capital[0].includes(valeur)) ||
-        country.translations.fra.common.includes(valeur)
+        (country.capital &&
+          country.capital[0].toLowerCase().includes(valeur)) ||
+        country.translations.fra.common.toLowerCase().includes(valeur)
     )
     .map((country) => {
       var objetCountry = {};
@@ -43,7 +50,7 @@ function displayCountries() {
 
 function showCountries(max) {
   document.querySelector("#showCountries").innerHTML = "";
-  for (let index = 0; index < max; index++) {
+  for (let index = 0; index < Math.min(max, tableMapped.length); index++) {
     const element = tableMapped[index];
     // On vérifie que la capitale a bien été renseignée
     let capitale = element.Capitale ? element.Capitale[0] : "Inconnu";
@@ -63,4 +70,29 @@ function showCountries(max) {
       `</small>
       </div>`;
   }
+}
+
+function sortTable(texte) {
+  switch (texte) {
+    case "croissant":
+      tableMapped.sort((a, b) => a.Population - b.Population);
+      break;
+    case "decroissant":
+      tableMapped.sort((a, b) => b.Population - a.Population);
+      break;
+    case "alphabet":
+      tableMapped.sort((a, b) => {
+        if (a.Nom < b.Nom) {
+          return -1;
+        } else if (a.Nom > b.Nom) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+    default:
+      break;
+  }
+  showCountries(rangeObject.value);
 }

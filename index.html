@@ -15,13 +15,13 @@
         <input type="text" class="form-control" id="floatingInput" placeholder="Rechercher">
         <label for="floatingInput">Rechercher</label>
         <div style="display: grid;grid-template-columns: auto min-content;">
-            <input type="range" class="form-range" id="rangeObject" min="1" max="100">
+            <input type="range" class="form-range" id="rangeObject" min="1" max="100" value="50">
             <span id="rangeValue"></span>
         </div>
         <div style="display: flex;">
-            <button type="button" class="btn btn-secondary">Tri croissant</button>
-            <button type="button" class="btn btn-secondary">Tri décroissant</button>
-            <button type="button" class="btn btn-secondary">Tri alphabétique</button>
+            <button type="button" class="btn btn-secondary" onclick="sortTable('croissant')">Tri croissant</button>
+            <button type="button" class="btn btn-secondary" onclick="sortTable('decroissant')">Tri décroissant</button>
+            <button type="button" class="btn btn-secondary" onclick="sortTable('alphabet')">Tri alphabétique</button>
         </div>
     </div>
     <div id="showCountries"></div>
